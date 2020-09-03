@@ -2,7 +2,7 @@
 <head>
 
     <link rel="icon" type="image/png" href="/img/icon.png">
-    <title>Memorama 1</title>
+    <title>Memorama 2</title>
     <style>
     * {
         margin: 0;
@@ -74,6 +74,11 @@
     #boxbuttons .button:hover {
         background: #999;
     }
+    .text-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     </style>
 </head>
     <body translate="no">
@@ -92,29 +97,7 @@
         </span> 
       </span>
       <img id="q-good" class="good" src="/memory/good.png">
-      <table>
-          <tr>
-              <td class="cols"></td>
-              <td class="cols">1</td>
-              <td class="cols">2</td>
-              <td class="cols">3</td>
-              <td class="cols">4</td>
-              <td class="cols">5</td>
-          </tr>
-          <tr class="rows">
-              <td>A</td>
-              <td colspan="5" rowspan="4"><div id="boxcard"></div></td>
-          </tr>
-          <tr class="rows">
-              <td>B</td>
-          </tr>
-          <tr class="rows">
-              <td>C</td>
-          </tr>
-          <tr class="rows">
-              <td>D</td>
-          </tr>
-      </table>
+      <td colspan="5" rowspan="4"><div id="boxcard"></div></td>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -179,11 +162,13 @@
 
         function OpenCard() {
             var id = $(this).attr("id");
+            var idtext = $(this).find('span').attr('id');
 
             if ($("#" + id + " img").is(":hidden")) {
                 $(Source + " div").unbind("click", OpenCard);
             
                 $("#" + id + " img").slideDown('fast');
+                $('#' + idtext).hide();
 
                 if (ImgOpened == "") {
                     BoxOpened = id;
@@ -197,6 +182,7 @@
                         setTimeout(function() {
                             $("#" + id + " img").slideUp('fast');
                             $("#" + BoxOpened + " img").slideUp('fast');
+                            $('#' + idtext).show();
                             BoxOpened = "";
                             ImgOpened = "";
                         }, 400);
@@ -228,7 +214,9 @@
         
             for (var y = 1; y < 3 ; y++) {
                 $.each(ImgSource, function(i, val) {
-                    $(Source).append("<div id=card" + y + i + "><img src=" + val + " />");
+                    var index = y + '' + i;
+                    index = parseInt(index) - 9;
+                    $(Source).append("<div id=card" + y + i + " class='text-center'><span id=card-text" + y + i + ">" + index + "</span><img src=" + val + " />");
                 });
             }
             $(Source + " div").click(OpenCard);
