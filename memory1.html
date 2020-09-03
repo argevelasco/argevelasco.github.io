@@ -1,6 +1,7 @@
 <html lang="en" class=" -webkit-">
 <head>
 
+    <link rel="icon" type="image/png" href="/img/icon.png">
     <title>Memorama 1</title>
     <style>
     * {
@@ -8,8 +9,8 @@
         padding: 0;
     }
     body {
-        font: 18px Verdana;
-        color: #FFF;
+      font: 18px Verdana;
+      color: #FFF;
       background: #CCC;
     }
     .good {
@@ -21,6 +22,13 @@
     }
     table tr td.cols {
         text-align: center;
+        font-size: 24px;
+        color: #000000;
+    }
+    table tr.rows {
+        text-align: center;
+        font-size: 18px;
+        color: #000000;
     }
     #picbox {
         margin: 0px auto;
@@ -61,6 +69,10 @@
         border-radius: 10px;
         cursor: pointer;
     }
+    #boxbuttons .button a{
+      text-decoration: none;
+      color: #fff;
+    }
     #boxbuttons .button:hover {
         background: #999;
     }
@@ -75,7 +87,10 @@
           Clicks
         </span>
         <span class="button">
-          <a onclick="ResetGame();">Reset</a>
+          <a onclick="ResetGame();">Reiniciar</a>
+        </span> 
+        <span class="button">
+          <a href="/">Regresar</a>
         </span> 
       </span>
       <img id="q-good" class="good" src="/memory/good.png">
