@@ -139,8 +139,8 @@
 			if (p.maxPlayCount && p.playCount > p.maxPlayCount) {
 				return;
 			}
-			p.stopImageNumber = $.isNumeric(defaultProperty.originalStopImageNumber) && Number(defaultProperty.originalStopImageNumber) >= 0 ?
-									Number(defaultProperty.originalStopImageNumber) : Math.floor(Math.random() * p.imageCount);
+
+			p.stopImageNumber = Math.floor(Math.random() * p.imageCount);
 			p.startCallback();
 			roll();
 			p.slowDownTimer = setTimeout(function(){
