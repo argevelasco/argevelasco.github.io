@@ -70,6 +70,7 @@
   display: block;
   opacity: 1;
   transition: opacity 250ms;
+  z-index: 999;
 }
 .main-nav > ul {
   width: 100%;
