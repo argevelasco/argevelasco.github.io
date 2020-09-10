@@ -10,7 +10,7 @@ var currRectY = 0;
 //Maze parameters
 var columns = 10;
 var rows = 10;
-var pathWidth = 20;
+var pathWidth = 200;
 var rectSize = pathWidth;
 var wallWidth = 2;
 var straightLinePercentage = 5; //higher is easier
