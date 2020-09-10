@@ -1,7 +1,6 @@
 .stacked-cards {
     position: relative;
-    margin-top: 50px;
-    margin-bottom: 100px;
+    padding-top: 100px;
 }
 .stacked-cards ul {
     position: relative;
