@@ -4,8 +4,20 @@
 
 <html>
     <head>
+        <link rel="icon" type="../image/png" href="/img/icon.png">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="../css/styles.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
         <style type="text/css">
+            body,h1 {font-family: "Raleway", sans-serif}
+            body, html {height: 100%}
+            .bgimg {
+              background: #fff;
+              background-image: url('/maze/back.png');
+              min-height: 100%;
+              background-position: center;
+              background-size: cover;
+            }
             #GameBoardCanvas {
                 border: 1px solid red;
                 padding: 5px;
@@ -14,14 +26,20 @@
             }
 
             body {
-                background: black;
+                background: white;
                 padding: 5px;
             }           
         </style>
     </head>
-<body>
-    <canvas id="GameBoardCanvas" width="400px" height="400px">
-    </canvas>
+<body class="bgimg">
+    <div class="w3-display-middle">
+        <p class="w3-large w3-center">Le dije a mi mamá que extrañaba a mi abue, y ella me dijo que ellos también me extrañaban, pero que podíamos intentar hablar por teléfono para animarlos.</p>
+        <div class="w3-large w3-center">
+            <canvas id="GameBoardCanvas" width="400px" height="400px">
+            </canvas>
+        </div>
+        <p class="w3-large w3-center">Ayuda a Conejita a llamar a sus abuelos resolviendo este laberinto para conectar la llamada, pueden moverte con las flechas de tu teclado.</p>
+    </div>
     <script type="text/javascript">
         var canvas = $('#GameBoardCanvas');
         //The game board 1 = walls, 0 = free space, and -1 = the goal
@@ -35,7 +53,7 @@
             [ 1, 0, 1, 0, 0, 0, 1, 0, 1, 0],
             [ 1, 0, 1, 0, 1, 0, 1, 0, 0, 0],
             [ 1, 0, 1, 0, 1, 0, 0, 1, 1, 0],
-            [-1, 0, 1, 0, 1, 1, 0, 0, 0, 0]
+            [ 1, -1, 1, 0, 1, 1, 0, 0, 0, 0]
         ];
         var player = {
             x: 0,
@@ -44,12 +62,19 @@
 
         //Draw the game board
         function draw(){
+
+          var rabbit = new Image();
+          rabbit.src = '/maze/rabbit.png';
+
+          var grandparents = new Image();
+          grandparents.src = '/maze/grandparents.png';
+
             var width = canvas.width();
             var blockSize = width/board.length;
             var ctx = canvas[0].getContext('2d');
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            //ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.clearRect(0, 0, width, width);
-            ctx.fillStyle="white";
+            ctx.fillStyle="red";
             //Loop through the board array drawing the walls and the goal
             for(var y = 0; y < board.length; y++){
                 for(var x = 0; x < board[y].length; x++){
@@ -60,21 +85,27 @@
                     //Draw the goal
                     else if(board[y][x] === -1){
                         ctx.beginPath();
-                        ctx.lineWidth = 5;
-                        ctx.strokeStyle = "gold";
-                        ctx.moveTo(x*blockSize, y*blockSize);
-                        ctx.lineTo((x+1)*blockSize, (y+1)*blockSize);
-                        ctx.moveTo(x*blockSize, (y+1)*blockSize);
-                        ctx.lineTo((x+1)*blockSize, y*blockSize);
+                        ctx.drawImage(grandparents, x*blockSize, (y+1)*blockSize);
+                        //ctx.lineWidth = 5;
+                        // ctx.strokeStyle = "gold";
+                        // ctx.moveTo(x*blockSize, y*blockSize);
+                        // ctx.lineTo((x+1)*blockSize, (y+1)*blockSize);
+                        // ctx.moveTo(x*blockSize, (y+1)*blockSize);
+                        // ctx.lineTo((x+1)*blockSize, y*blockSize);
                         ctx.stroke();
                     }
                 }
             }
             //Draw the player
             ctx.beginPath();
-            var half = blockSize/2;
-            ctx.fillStyle = "blue";
-            ctx.arc(player.x*blockSize+half, player.y*blockSize+half, half, 0, 2*Math.PI);
+            var half = blockSize/20;
+            ctx.clearRect(40, 360, 40, 40);
+            rabbit.onload = function(){
+              ctx.drawImage(grandparents, 40, 360);
+              ctx.drawImage(rabbit, player.x*blockSize+half, player.y*blockSize+half);
+            }
+            //ctx.fillStyle = "blue";
+            //ctx.arc(player.x*blockSize+half, player.y*blockSize+half, half, 0, 2*Math.PI);
             ctx.fill();
         }
 
