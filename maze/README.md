@@ -1,4 +1,5 @@
-# jQuery-maze
-A simple maze game built in jQuery.
+# Maze-Game
+Maze minigame made using jQuery, HTML, JavaScript, and CSS. Goal is to drag the player character to the reward without touching the obstacle walls. Hope you enjoy.
 
-![alt tag](https://cloud.githubusercontent.com/assets/15108927/19015683/7c336e00-8826-11e6-8f3c-b0e0825cc9cd.png)
+Screenshot of when game starts.
+![](/Screenshot.JPG)
