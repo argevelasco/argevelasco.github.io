@@ -36,9 +36,9 @@ function drawMazeAndRectangle(rectX, rectY) {
 	 //http://www.hereandabove.com/maze/mazeorig.form.html; 
 	
 	 //from web:
-	 mazeImg.src = ImgSrc;
+	 //mazeImg.src = ImgSrc;
 	 // for local img:
-	 //mazeImg.src = "maze.gif";
+	 mazeImg.src = "maze.gif";
 	 //if using local img ensure Maze parameters match img
 }
 function drawRectangle(x, y, style) {
