@@ -19,8 +19,19 @@
 	}
 	</style>
 	<link rel="stylesheet" href="/css/nav.css">
+
+	<link rel="stylesheet" type="text/css" href="/css/stackedCards.css"/>
+	<script src="/js/stackedCards.js"><script>
 <script>
   window.console = window.console || function(t) {};
+
+	var stackedCard = new stackedCards({
+		selector: '.mycards',
+		layout: "slide",
+		transformOrigin: "center",
+	});
+
+	stackedCard.init();
 </script>
 </head>
 <body>
@@ -60,20 +71,22 @@
   </div>
 </div>
 
-<!-- Photo Grid -->
-<div class="w3-content w3-padding-large w3-margin-top" id="portfolio">
-    <img src="/img/sept/001.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/002.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/003.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/004.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/005.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/006.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/007.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/008.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/009.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/010.jpg" style="width:100%" class="w3-image w3-margin-top">
-    <img src="/img/sept/011.jpg" style="width:100%" class="w3-image w3-margin-top">
+<div class="mycards">
+	<ul>
+	    <li><img src="/img/sept/001.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/002.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/003.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/004.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/005.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/006.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/007.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/008.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/009.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/010.jpg" style="width:100%"></li>
+	    <li><img src="/img/sept/011.jpg" style="width:100%"></li>
+	</ul>
 </div>
+
 
 <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
