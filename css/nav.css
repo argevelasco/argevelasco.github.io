@@ -2,7 +2,7 @@
   position: absolute;
   bottom: 20px;
   right: 20px;
-  z-index: 2;
+  z-index: 100;
 }
 .float-nav > a.menu-btn {
   text-decoration: none;
@@ -70,7 +70,7 @@
   display: block;
   opacity: 1;
   transition: opacity 250ms;
-  z-index: 999;
+  z-index: 99;
 }
 .main-nav > ul {
   width: 100%;
