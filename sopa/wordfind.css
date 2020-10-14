@@ -68,9 +68,9 @@ h1 {
     padding: 1rem;*/
   }
   .puzzleSquare {
-    height: 3.5rem;
-    width: 3.5rem;
-    font: 2.5rem sans-serif;
+    height: 2.5rem;
+    width: 2.5rem;
+    font: 1.5rem sans-serif;
   }
 }
 
@@ -133,8 +133,8 @@ button::-moz-focus-inner {
 }
 
 #imagesList li img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 
 /* indicates that the word has been found */
