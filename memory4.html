@@ -1,0 +1,236 @@
+<html lang="en" class=" -webkit-">
+<head>
+
+    <link rel="icon" type="image/png" href="/img/icon.png">
+    <title>Memorama de Muertos</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+      font: 18px Verdana;
+      color: #FFF;
+      background: #CCC;
+    }
+    .good {
+        position: absolute;
+        display: none;
+        margin-left: auto;
+        margin-right: auto;
+        width: 45%;
+        z-index: 999;
+    }
+    table tr td.cols {
+        text-align: center;
+        color: #000000;
+    }
+    table tr.rows {
+        text-align: center;
+        color: #000000;
+    }
+    #picbox {
+        margin: 0px auto;
+        width: 660px;
+    }
+    #boxcard {
+        z-index: 1;
+        margin: 10px 0 0;
+    }
+    #boxcard div{
+        float: left;
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+        padding: 5px;
+        border: 4px solid #EE872A;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 1px 5px rgba(0,0,0,.5);
+      background: #B1B1B1;
+        z-index: 2;
+    }
+    #boxcard div img {
+        display: none;
+        border-radius: 10px;
+        z-index: 3;
+    }
+    #boxbuttons {
+        text-align: center;
+        margin: 20px;
+        display: block;
+    }
+    #boxbuttons .button {
+        text-transform: uppercase;
+        background: #EE872A;
+        padding: 5px 10px;
+        margin: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    #boxbuttons .button a{
+      text-decoration: none;
+      color: #fff;
+    }
+    #boxbuttons .button:hover {
+        background: #999;
+    }
+    .text-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    </style>
+</head>
+    <body translate="no">
+
+    <div id="picbox">
+      <span id="boxbuttons">
+        <span class="button">
+          <span id="counter">0</span>
+          Clicks
+        </span>
+        <span class="button">
+          <a onclick="ResetGame();">Reiniciar</a>
+        </span> 
+        <span class="button">
+          <a href="/">Regresar</a>
+        </span> 
+      </span>
+      <img id="q-good" class="good" src="/memory/good.png">
+      <td colspan="5" rowspan="4"><div id="boxcard"></div></td>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script id="rendered-js">
+        var BoxOpened = "";
+        var ImgOpened = "";
+        var CardTextOpened = "";
+        var Counter = 0;
+        var ImgFound = 0;
+
+        var Source = "#boxcard";
+
+        var ImgSource = [
+          "/memory2/23.png",
+          "/memory2/22.png",
+          "/memory2/21.png",
+          "/memory2/20.png",
+          "/memory2/19.png",
+          "/memory2/18.png",
+          "/memory2/17.png",
+          "/memory2/16.png",
+          "/memory2/15.png",
+          "/memory2/14.png"
+        ];
+
+        function RandomFunction(MaxValue, MinValue) {
+                return Math.round(Math.random() * (MaxValue - MinValue) + MinValue);
+            }
+            
+        function ShuffleImages() {
+            var ImgAll = $(Source).children();
+            var ImgThis = $(Source + " div:first-child");
+            var ImgArr = new Array();
+
+            for (var i = 0; i < ImgAll.length; i++) {
+                ImgArr[i] = $("#" + ImgThis.attr("id") + " img").attr("src");
+                ImgThis = ImgThis.next();
+            }
+            
+                ImgThis = $(Source + " div:first-child");
+            
+            for (var z = 0; z < ImgAll.length; z++) {
+            var RandomNumber = RandomFunction(0, ImgArr.length - 1);
+
+                $("#" + ImgThis.attr("id") + " img").attr("src", ImgArr[RandomNumber]);
+                ImgArr.splice(RandomNumber, 1);
+                ImgThis = ImgThis.next();
+            }
+        }
+
+        function ResetGame() {
+            ShuffleImages();
+            $(Source + " div img").hide();
+            $(Source + " div").css("visibility", "visible");
+            Counter = 0;
+            $("#success").remove();
+            $("#counter").html("" + Counter);
+            BoxOpened = "";
+            ImgOpened = "";
+            CardTextOpened = "";
+            ImgFound = 0;
+            return false;
+        }
+
+        function OpenCard() {
+            var id = $(this).attr("id");
+            var idtext = $(this).find('span').attr('id');
+
+            if ($("#" + id + " img").is(":hidden")) {
+                $(Source + " div").unbind("click", OpenCard);
+            
+                $("#" + id + " img").slideDown('fast');
+                $('#' + idtext).hide();
+
+                if (ImgOpened == "") {
+                    BoxOpened = id;
+                    CardTextOpened = idtext;
+                    ImgOpened = $("#" + id + " img").attr("src");
+                    setTimeout(function() {
+                        $(Source + " div").bind("click", OpenCard)
+                    }, 300);
+                } else {
+                    CurrentOpened = $("#" + id + " img").attr("src");
+                    if (ImgOpened != CurrentOpened) {
+                        setTimeout(function() {
+                            $("#" + id + " img").slideUp('fast');
+                            $("#" + BoxOpened + " img").slideUp('fast');
+                            $('#' + idtext).show();
+                            $('#' + CardTextOpened).show();
+                            BoxOpened = "";
+                            ImgOpened = "";
+                            CardTextOpened = "";
+                        }, 400);
+                    } else {
+                        $('#q-good').show();
+                        setTimeout(function() {
+                            $('#q-good').hide();
+                            $("#" + id + " img").parent().css("visibility", "hidden");
+                            $("#" + BoxOpened + " img").parent().css("visibility", "hidden");
+                            $('#' + CardTextOpened).hide();
+                            ImgFound++;
+                            BoxOpened = "";
+                            ImgOpened = "";
+                            CardTextOpened = "";
+                        }, 2000);
+                    }
+                    setTimeout(function() {
+                        $(Source + " div").bind("click", OpenCard)
+                    }, 400);
+                }
+                Counter++;
+                $("#counter").html("" + Counter);
+
+                if (ImgFound == ImgSource.length) {
+                    $("#counter").prepend('<span id="success">Encontraste todas las imágenes</span>');
+                }
+            }
+        }
+
+        $(function() {
+        
+            var total = 0;
+            for (var y = 1; y < 3 ; y++) {
+                $.each(ImgSource, function(i, val) {
+                    total++;
+                    $(Source).append("<div id=card" + y + i + " class='text-center'><span id=card-text" + y + i + ">" + total + "</span><img src=" + val + " />");
+                });
+            }
+            $(Source + " div").click(OpenCard);
+            ShuffleImages();
+        });
+    </script>
+
+    </body>
+</html>
